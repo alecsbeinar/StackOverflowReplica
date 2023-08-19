@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create an Account</title>
+</head>
+<body>
+<form method="POST" action="/signup/">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
+</body>
+</html>

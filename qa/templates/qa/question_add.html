@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/que_add.css' %}">
+</head>
+<body>
+{% for e in form.non_field_errors %}
+    <div class="alert alert-danger">{{ e }}</div>
+{% endfor %}
+
+<form class="form-horizontal" method="post" action="/ask/">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            <div class="control-group">
+                <label class="control-label">
+                    {{ field.label }}
+                </label>
+                <div class="controls">{{ field }}</div>
+
+                <div id="has-error">
+                    <p>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <strong>{{ error|safe }}</strong>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Сохранить
+        </button>
+    </div>
+</form>
+
+{% if error %}
+    <p>
+        {{ error }}
+    </p>
+    <p>
+    <a href="{% url "login" %}">Login</a>
+    </p>
+{% endif %}
+
+</body>
+</html>

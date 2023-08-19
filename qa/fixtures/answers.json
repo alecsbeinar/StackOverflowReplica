@@ -1,0 +1,82 @@
+[
+  {
+    "model": "qa.answer",
+    "pk": 1,
+    "fields": {
+      "text": "alksdjf",
+      "added_at": "2023-06-24T20:04:58Z",
+      "question": 1,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 2,
+    "fields": {
+      "text": "some",
+      "added_at": "2023-06-24T20:06:01Z",
+      "question": 1,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 3,
+    "fields": {
+      "text": "and1",
+      "added_at": "2023-07-01T21:08:18.942Z",
+      "question": 8,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 4,
+    "fields": {
+      "text": "ans2",
+      "added_at": "2023-07-01T21:08:32.153Z",
+      "question": 8,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 5,
+    "fields": {
+      "text": "first answer",
+      "added_at": "2023-07-01T21:11:24.994Z",
+      "question": 9,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 6,
+    "fields": {
+      "text": "knml",
+      "added_at": "2023-07-20T07:31:05.028Z",
+      "question": 4,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 7,
+    "fields": {
+      "text": "Да",
+      "added_at": "2023-07-23T11:39:25.478Z",
+      "question": 14,
+      "author": "1"
+    }
+  },
+  {
+    "model": "qa.answer",
+    "pk": 8,
+    "fields": {
+      "text": "Нет, он асенька",
+      "added_at": "2023-07-23T11:40:22.997Z",
+      "question": 14,
+      "author": "6"
+    }
+  }
+]

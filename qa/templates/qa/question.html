@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
+<p>Title: {{ question.title }}</p>
+<p>Text: {{ question.text }}</p>
+<p> Answers:
+    {% for answer in answers %}
+        {{ answer }},
+    {% endfor %}
+</p>
+
+<form class="form-horizontal" method="post" action="{% url "single_question" question.id %}">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            <div class="control-group">
+                <label class="control-label">
+                    {{ field.label }}
+                </label>
+                <div class="controls">{{ field }}</div>
+
+                <div class="has-error">
+                    <p>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <strong>{{ error|safe }}</strong>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Сохранить
+        </button>
+    </div>
+</form>
+
+<div class="auth">
+    {% if is_auth_error %}
+        <p>
+        Log in pls - <a href="{% url "login" %}">Login</a>
+        </p>
+    {% endif %}
+</div>
+
+</body>
+</html>
