@@ -13,7 +13,7 @@
     {% endfor %}
 </p>
 
-<form class="form-horizontal" method="post" action="{% url "single_question" question.id %}">
+<form class="form-horizontal" method="post" action="{% url "qa:single_question" question.id %}">
     {% csrf_token %}
     <fieldset>
         {% for field in form %}
@@ -45,7 +45,7 @@
 <div class="auth">
     {% if is_auth_error %}
         <p>
-        Log in pls - <a href="{% url "login" %}">Login</a>
+        Log in pls - <a href="{% url "qa:login" %}">Login</a>
         </p>
     {% endif %}
 </div>

@@ -40,8 +40,14 @@
         </p>
     {% endif %}
 
+    {% if messages %}
+        {% for message in messages %}
+        	{{ message }}
+        {% endfor %}
+    {% endif %}
+
     <p>
-        <a href="{% url "register" %}">Register</a>
+        <a href="{% url "qa:register" %}">Register</a>
     </p>
 </main>
 

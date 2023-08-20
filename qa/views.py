@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib import messages
 
 from qa.forms import AskForm, AnswerForm, RegisterForm, LoginForm
 from qa.models import Question, Answer, Session
@@ -89,7 +90,8 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("main_page")
+            messages.success(request, "Congratulations! Registration succeed")
+            return redirect("qa:login")
     else:
         form = RegisterForm()
     return render(request, 'qa/register.html', {
@@ -106,7 +108,7 @@ def login(request):
 
         session = do_login(username, password)
         if session is not None:
-            response = redirect("main_page")
+            response = redirect("qa:main_page")
             response.set_cookie(
                 'sessid', session.key,
                 httponly=True,

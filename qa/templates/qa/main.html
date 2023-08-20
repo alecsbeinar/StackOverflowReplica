@@ -13,7 +13,7 @@
     <div class="list-group">
         <h1>Questions:</h1>
         {% for question in questions %}
-            <a href="{% url 'single_question' question.id %}"
+            <a href="{% url 'qa:single_question' question.id %}"
                class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                 <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32"
                      class="rounded-circle flex-shrink-0">
@@ -30,12 +30,12 @@
 </div>
 
 <p>
-    <a href="{% url "login" %}">Login</a>
-    <a href="{% url "exit" %}">Logout</a>
+    <a href="{% url "qa:login" %}">Login</a>
+    <a href="{% url "qa:exit" %}">Logout</a>
 </p>
 
 <p>
-    <a href="{% url "ask_question" %}">Create question</a>
+    <a href="{% url "qa:ask_question" %}">Create question</a>
 </p>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
