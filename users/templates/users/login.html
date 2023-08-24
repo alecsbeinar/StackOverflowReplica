@@ -11,7 +11,7 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
-    <form method="POST" action="/login/">
+    <form method="POST" action="{% url "users:login" %}">
         {% csrf_token %}
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -47,7 +47,7 @@
     {% endif %}
 
     <p>
-        <a href="{% url "qa:register" %}">Register</a>
+        <a href="{% url "users:register" %}">Register</a>
     </p>
 </main>
 

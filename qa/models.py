@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 
 
 class QuestionManager(models.Manager):
@@ -37,8 +37,3 @@ class Answer(models.Model):
     def __str__(self) -> str:
         return f"{self.author}- {self.text[:10]}"
 
-
-class Session(models.Model):
-    key = models.CharField(max_length=100, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    expires = models.DateTimeField()

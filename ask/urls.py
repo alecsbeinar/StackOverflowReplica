@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from qa.views import main
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("qa.urls", namespace='qa')),
-    # path('users/', include("users.urls", namespace='users')),
-]
+    path('admin/', admin.site.urls, name='admin'),
+    path('', main, name="main_page"),
+    path('qa/', include("qa.urls", namespace='qa')),
+    path('users/', include("users.urls", namespace='users')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

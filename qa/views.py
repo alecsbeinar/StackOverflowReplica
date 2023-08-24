@@ -1,12 +1,11 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib import messages
 
-from qa.forms import AskForm, AnswerForm, RegisterForm, LoginForm
-from qa.models import Question, Answer, Session
-from qa.tools import do_login
+from qa.forms import AskForm, AnswerForm
+from qa.models import Question, Answer
 
 
 def test(request, *args, **kwargs):
@@ -36,11 +35,13 @@ def main(request):
     context = {
         'questions': page.object_list,
         'paginator': paginator,
-        'page': page
+        'page': page,
+        'user': request.user,
     }
     return render(request, 'qa/main.html', context)
 
 
+@login_required
 def single_question(request, number):
     question = get_object_or_404(Question, id=number)
     answers = Answer.objects.filter(question_id=number)
@@ -49,7 +50,7 @@ def single_question(request, number):
 
     if request.method == "POST":
         author = request.user
-        if author is not None:
+        if author.is_authenticated:
             answer = Answer(author=author, question=question)
             form = AnswerForm(request.POST, instance=answer)
             form.save()
@@ -66,11 +67,12 @@ def single_question(request, number):
     return render(request, "qa/question.html", context)
 
 
+@login_required
 def ask_question(request):
     error = ''
     form = AskForm()
     if request.method == "POST":
-        if request.user is not None:
+        if request.user.is_authenticated:
             form = AskForm(request.POST)
             form.author = request.user
             if form.is_valid():
@@ -85,47 +87,3 @@ def ask_question(request):
     })
 
 
-def register(request):
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Congratulations! Registration succeed")
-            return redirect("qa:login")
-    else:
-        form = RegisterForm()
-    return render(request, 'qa/register.html', {
-        'form': form,
-    })
-
-
-def login(request):
-    error = ''
-    form = LoginForm()
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        session = do_login(username, password)
-        if session is not None:
-            response = redirect("qa:main_page")
-            response.set_cookie(
-                'sessid', session.key,
-                httponly=True,
-                expires=session.expires
-            )
-            return response
-        else:
-            error = u'Incorrect login or password!'
-    return render(request, 'qa/login.html', {
-        "error": error,
-        "form": form,
-    })
-
-
-def logout(request):
-    sessid = request.COOKIES.get('sessid')
-    if sessid is not None:
-        Session.objects.filter(key=sessid).delete()
-    url = request.GET.get('continue', '/')
-    return HttpResponseRedirect(url)

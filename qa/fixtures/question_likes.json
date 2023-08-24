@@ -1,1 +1,0 @@
-[{"model": "qa.question_likes", "pk": 1, "fields": {"question": 1, "user": 1}}, {"model": "qa.question_likes", "pk": 2, "fields": {"question": 2, "user": 1}}, {"model": "qa.question_likes", "pk": 3, "fields": {"question": 2, "user": 2}}, {"model": "qa.question_likes", "pk": 4, "fields": {"question": 3, "user": 2}}]

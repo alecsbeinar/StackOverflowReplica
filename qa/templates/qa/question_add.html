@@ -12,7 +12,7 @@
     <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
 
-<form class="form-horizontal" method="post" action="/ask/">
+<form class="form-horizontal" method="post" action="{% url "qa:ask_question" %}">
     {% csrf_token %}
     <fieldset>
         {% for field in form %}
@@ -46,7 +46,7 @@
         {{ error }}
     </p>
     <p>
-    <a href="{% url "qa:login" %}">Login</a>
+    <a href="{% url "users:login" %}">Login</a>
     </p>
 {% endif %}
 
